@@ -24,3 +24,5 @@ pnpm-debug.log*
 
 /vue3-cesium
 vue3-cesium.zip
+
+package-lock.json

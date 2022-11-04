@@ -92,11 +92,6 @@
         </template>
       </a-tree>
     </div>
-    <div class="loading" v-if="">
-      <template>
-        <LoadingOutlined />
-      </template>
-    </div>
   </div>
 </template>
 <script>
@@ -108,7 +103,7 @@ import * as Layer from "../../assets/js/Layer";
 import { react } from "@babel/types";
 import { hideEarth } from "@/assets/js/cesium_work";
 import { appearEarth } from "@/assets/js/cesium_work";
-import { LoadingOutlined } from '@ant-design/icons';
+import { LoadingOutlined } from '@ant-design/icons-vue';
 export default defineComponent({
   name: "LayerTree",
 
@@ -279,7 +274,6 @@ export default defineComponent({
           }
         }
       }
-      // sleep(3000)
       // unlockFunc(e);
       // console.log(e)
       // e.node.dataRef.loading = false;
@@ -389,6 +383,7 @@ export default defineComponent({
      */
     const fetchLayerData = (url, key, dataType) => {
       return axios.post(url).then((res) => {
+        console.log(axios.post(url));
         let data = res.data.data;
         // 包装每一个结点
         data.forEach((d) => {
