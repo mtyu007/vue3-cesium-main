@@ -1,0 +1,44 @@
+.cesium-performanceDisplay-defaultContainer {
+    position: absolute;
+    top: auto !important;
+    left: 50px !important;
+    bottom: 0px;
+    text-align: right;
+    float: left;
+    min-height: 26px !important;
+    z-index: 999;
+  }
+
+.cesium-performanceDisplay-ms{
+    font-size: 13px !important;
+    
+    color: #e9e9e9 !important;
+    float: left;
+    margin-right: 20px; 
+    text-shadow: 2px 2px 2px #000;
+}
+.cesium-performanceDisplay-fps{
+    font-size: 13px !important;
+    min-height: 26px;
+    color: #e9e9e9 !important;
+    float: left;
+    margin-right: 20px;
+    text-shadow: 2px 2px 2px #000;
+}
+
+.cesium-performanceDisplay{
+    border: none !important;
+    
+    padding: 0px !important;
+
+}
+
+.modify{
+    top: 109px;
+}
+
+.cesium-viewer-fullscreenContainer{
+    top: 37px;
+    right: 3px!important;
+    width: 32px!important;
+}

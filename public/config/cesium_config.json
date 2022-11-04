@@ -1,0 +1,14 @@
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI4Zjk2NjYxNC1jZDEwLTQ0Y2EtYjk3Yy1lOTY2MjNlYjQwOGIiLCJpZCI6NjgzMDcsImlhdCI6MTYzMjQ1MzU2M30.smniZs_CRZSwLtBrlQYvGH2yXgSesDHnBDy0EAVjxDE",
+  "viewer": {
+    "sceneModePicker": false,
+    "baseLayerPicker": false,
+    "navigationHelpButton": false,
+    "animation": false,
+    "timeline": false,
+    "geocoder": false,
+    "infoBox": false,
+    "selectionIndicator": false,
+    "homeButton": true
+  }
+}

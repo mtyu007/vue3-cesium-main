@@ -1,0 +1,64 @@
+.ant-tree-switcher,
+.ant-tree-switcher_open {
+  position: relative;
+  flex: none;
+  align-self: stretch;
+  width: 24px;
+  margin: 0;
+  line-height: 24px;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  border-color: #ccc !important;
+  background: none !important;
+}
+
+.ant-tree.ant-tree-show-line,
+li span.ant-tree-switcher,
+.ant-tree-title {
+  color: #ffffffd9 !important;
+}
+
+.ant-tree-checkbox-inner,
+.ant-tree-checkbox-indeterminate .ant-tree-checkbox-inner {
+  background: none;
+}
+
+.ant-tree-node-selected {
+  background-color: #3f4854b3 !important;
+}
+
+.ant-tree li .ant-tree-node-content-wrapper:hover {
+  background: hsla(0, 0%, 100%, 0.08) !important;
+}
+
+.ant-tree-title {
+  user-select: none;
+}
+
+.cesium-viewer-toolbar {
+  display: flex !important;
+  position: absolute !important;
+  bottom: 80px !important;
+  left: 40px !important;
+  flex-direction: column !important;
+  top: auto !important;
+  right: auto !important;
+
+}
+.cesium-navigation-help {
+  bottom: 20%;
+  left: 100%;
+  transform-origin: 0px -10px !important;
+}
+
+.cesium-baseLayerPicker-dropDown {
+  right: auto !important;
+  left: 56px;
+  height: 300px;
+}
+
+
+.cesium-button{
+  background: #2A2B2E;
+}
