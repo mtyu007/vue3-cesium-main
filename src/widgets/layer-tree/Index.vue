@@ -45,7 +45,7 @@
         v-model:checkedKeys="checkedKeys"
         defaultExpandAll
         @select="onNodeSelect"
-        @check="nodeCheck"
+        @check="lockFunc"
         :tree-data="treeData"
         checkable
         show-line
@@ -95,15 +95,16 @@
   </div>
 </template>
 <script>
-import { defineComponent, onMounted, ref, watch } from "vue";
+import {defineComponent, onMounted, ref } from "vue";
 import axios from "axios";
-import { useRoute } from "vue-router";
+import {useRoute} from "vue-router";
 import Base64 from "@/assets/js/Base64";
 import * as Layer from "../../assets/js/Layer";
-import { react } from "@babel/types";
-import { hideEarth } from "@/assets/js/cesium_work";
-import { appearEarth } from "@/assets/js/cesium_work";
-import { LoadingOutlined } from '@ant-design/icons-vue';
+import {react} from "@babel/types";
+import {hideEarth} from "@/assets/js/cesium_work";
+import {appearEarth} from "@/assets/js/cesium_work";
+
+
 export default defineComponent({
   name: "LayerTree",
 
@@ -181,40 +182,18 @@ export default defineComponent({
     // key-node映射
     const nodeMap = new Map();
 
-    const loadedKeys = ref([0]);
-  
-    function lockFunc(...args) {
-      // console.log(e);
+    function lockFunc(checkedKeys, e) {
       console.log("locked")
-      // e.node.dataRef.loading = true;
-      // e.node.dataRef.disableCheckbox = true;
+      e.node.dataRef.loading = true;
+      e.node.dataRef.disableCheckbox = true;
+
+      setTimeout(nodeCheck, 100, checkedKeys, e)
     }
 
     function unlockFunc(e) {
-      // console.log(e);
       console.log("unlocked")
-      // e.node.dataRef.loading = false;
-      // e.node.dataRef.disableCheckbox = false;
-    }
-
-    // const modifyTreeFunc = (checkedKeys, e) => {
-    //   console.log(checkedKeys)
-    //   console.log(e)
-    //   e.node.dataRef.loading = true;
-    //   e.node.dataRef.disableCheckbox = true;
-    // }
-
-
-    // watch (loadedKeys, () => {
-    //   console.log(_node);
-    //   _node.node.dataRef.loading = false;
-    //   _node.node.dataRef.disableCheckbox = false;
-    // });
-
-
-    let sleep = function (time) {
-      let now = Date.now();
-      while(Date.now() - now < time){}
+      e.node.dataRef.loading = false;
+      e.node.dataRef.disableCheckbox = false;
     }
 
     /**
@@ -223,19 +202,16 @@ export default defineComponent({
      * @param {*} e
      */
     const nodeCheck = (checkedKeys, e) => {
-
       const key = e.node.eventKey;
       const layer = nodeMap.get(key);
 
       // 如果底层没有被选中，则隐藏地球
-      if(key == '0' && checkedKeys.indexOf('0') == '-1') {
+      if (key == '0' && checkedKeys.indexOf('0') == '-1') {
         hideEarth();
-      } else if(key == '0' && checkedKeys.indexOf('0') != '-1') {
+      } else if (key == '0' && checkedKeys.indexOf('0') != '-1') {
         // 如果底层被选中了，则显示地球
         appearEarth();
       }
-
-      // lockFunc(e);
 
       // 父级节点处理
       if (typeof layer == "undefined") {
@@ -274,10 +250,8 @@ export default defineComponent({
           }
         }
       }
-      // unlockFunc(e);
-      // console.log(e)
-      // e.node.dataRef.loading = false;
-      // e.node.dataRef.disableCheckbox = true;
+
+      setTimeout(unlockFunc, 1000, e)
     };
 
     /**
@@ -383,7 +357,6 @@ export default defineComponent({
      */
     const fetchLayerData = (url, key, dataType) => {
       return axios.post(url).then((res) => {
-        console.log(axios.post(url));
         let data = res.data.data;
         // 包装每一个结点
         data.forEach((d) => {
@@ -535,13 +508,13 @@ svg {
   border-radius: 4px;
   border: 1px solid #152b51;
   background: linear-gradient(to left, #4db3ff, #4db3ff) left top no-repeat,
-    linear-gradient(to bottom, #4db3ff, #4db3ff) left top no-repeat,
-    linear-gradient(to left, #4db3ff, #4db3ff) right top no-repeat,
-    linear-gradient(to bottom, #4db3ff, #4db3ff) right top no-repeat,
-    linear-gradient(to left, #4db3ff, #4db3ff) left bottom no-repeat,
-    linear-gradient(to bottom, #4db3ff, #4db3ff) left bottom no-repeat,
-    linear-gradient(to left, #4db3ff, #4db3ff) right bottom no-repeat,
-    linear-gradient(to left, #4db3ff, #4db3ff) right bottom no-repeat;
+  linear-gradient(to bottom, #4db3ff, #4db3ff) left top no-repeat,
+  linear-gradient(to left, #4db3ff, #4db3ff) right top no-repeat,
+  linear-gradient(to bottom, #4db3ff, #4db3ff) right top no-repeat,
+  linear-gradient(to left, #4db3ff, #4db3ff) left bottom no-repeat,
+  linear-gradient(to bottom, #4db3ff, #4db3ff) left bottom no-repeat,
+  linear-gradient(to left, #4db3ff, #4db3ff) right bottom no-repeat,
+  linear-gradient(to left, #4db3ff, #4db3ff) right bottom no-repeat;
 
   background-size: 1px 20px, 20px 1px, 1px 20px, 20px 1px;
   background-color: #14141480;
@@ -563,13 +536,13 @@ svg {
 
   border: 1px solid #152b51;
   background: linear-gradient(to left, #4db3ff, #4db3ff) left top no-repeat,
-    linear-gradient(to bottom, #4db3ff, #4db3ff) left top no-repeat,
-    linear-gradient(to left, #4db3ff, #4db3ff) right top no-repeat,
-    linear-gradient(to bottom, #4db3ff, #4db3ff) right top no-repeat,
-    linear-gradient(to left, #4db3ff, #4db3ff) left bottom no-repeat,
-    linear-gradient(to bottom, #4db3ff, #4db3ff) left bottom no-repeat,
-    linear-gradient(to left, #4db3ff, #4db3ff) right bottom no-repeat,
-    linear-gradient(to left, #4db3ff, #4db3ff) right bottom no-repeat;
+  linear-gradient(to bottom, #4db3ff, #4db3ff) left top no-repeat,
+  linear-gradient(to left, #4db3ff, #4db3ff) right top no-repeat,
+  linear-gradient(to bottom, #4db3ff, #4db3ff) right top no-repeat,
+  linear-gradient(to left, #4db3ff, #4db3ff) left bottom no-repeat,
+  linear-gradient(to bottom, #4db3ff, #4db3ff) left bottom no-repeat,
+  linear-gradient(to left, #4db3ff, #4db3ff) right bottom no-repeat,
+  linear-gradient(to left, #4db3ff, #4db3ff) right bottom no-repeat;
 
   background-size: 1px 20px, 20px 1px, 1px 20px, 20px 1px;
   background-color: #14141480;

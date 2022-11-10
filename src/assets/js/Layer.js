@@ -111,7 +111,6 @@ export class KmlLayer extends Layer {
   hide() {
     if (this.hidden == true) { return; }
     if (this.layerObject != null) {
-      console.log("why not?????")
       CesiumWork.hide(this.layerObject);
       this.hidden = true;
     }
