@@ -186,6 +186,10 @@ export default defineComponent({
       console.log("locked")
       e.node.dataRef.loading = true;
       e.node.dataRef.disableCheckbox = true;
+      e.node.children.forEach((c) => {
+        c.props.dataRef.loading = true;
+        c.props.dataRef.disableCheckbox = true;
+      })
 
       setTimeout(nodeCheck, 100, checkedKeys, e)
     }
@@ -194,6 +198,10 @@ export default defineComponent({
       console.log("unlocked")
       e.node.dataRef.loading = false;
       e.node.dataRef.disableCheckbox = false;
+      e.node.children.forEach((c) => {
+        c.props.dataRef.loading = false;
+        c.props.dataRef.disableCheckbox = false;
+      })
     }
 
     /**
@@ -409,7 +417,7 @@ export default defineComponent({
     const TERRAIN_DATA_API = "api/v2/terrain/list";
 
     onMounted(() => {
-      console.log(route);
+      // console.log(route);
       // 获取数据
       Promise.all([
         fetchLayerData(

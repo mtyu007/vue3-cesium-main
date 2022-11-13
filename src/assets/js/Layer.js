@@ -102,7 +102,6 @@ export class KmlLayer extends Layer {
           this.loadSuccess();
         })
         .catch(() => {
-          console.log('url:'+this.dataRef.url);
           this.loadError();
         })
     }
@@ -129,12 +128,12 @@ export class PanoramaLayer extends Layer {
     if (this.layerObject != null) {
       CesiumWork.show(this.layerObject);
       this.hidden = false;
-      this.loadSuccess();
     } else {
       CesiumWork.loadPanorama(this.dataRef.url)
         .then((layerObject) => {
           this.layerObject = layerObject;
           this.hidden = false;
+          this.loadSuccess();
         })
         .catch(() => {
           this.loadError();
@@ -163,12 +162,12 @@ export class TilesetLayer extends Layer {
     if (this.layerObject != null) {
       CesiumWork.show(this.layerObject);
       this.hidden = false;
-      this.loadSuccess();
     } else {
       CesiumWork.loadTilesets(this.dataRef.url)
         .then((layerObject) => {
           this.layerObject = layerObject;
           this.hidden = false;
+          this.loadSuccess();
         })
         .catch(() => {
           this.loadError();
@@ -201,10 +200,10 @@ export class TerrainLayer extends Layer {
     if (this.layerObject != null) {
       CesiumWork.showTerrain(this.layerObject);
       this.hidden = false;
-      this.loadSuccess();
     } else {
       this.layerObject = CesiumWork.loadTerrain(this.dataRef.url);
       this.hidden = false;
+      this.loadSuccess();
     }
   }
 
