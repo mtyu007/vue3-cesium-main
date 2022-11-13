@@ -83,12 +83,12 @@ export const initViwer = (viewer) => {
  */
 export const loadKml = (url) => {
   return new Promise((resolve, reject) => {
-    console.log("贴地成功");
     let options = {
       camera: _viewer.scene.camera,
       canvas: _viewer.scene.canvas,
       clampToGround: true, //开启贴地
     };
+    console.log("贴地成功");
     Cesium.KmlDataSource.load(url, options)
       .then((dataSource) => {
         _viewer.dataSources.add(dataSource);
