@@ -769,6 +769,7 @@ function drawShape(positionData) {
         positions: positionData,
         material: Cesium.Color.YELLOW,
         width: 3,
+        clampToGround: true
       },
     });
     shape['shapeType'] = "tempLine";
